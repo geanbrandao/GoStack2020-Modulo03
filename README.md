@@ -103,3 +103,26 @@ $ yarn add jsonwebtoken
 Para validar os campos que recebe pela api usa-se a dependencia yup
 Ele usa o schema validation
 $ yarn add yup
+
+# MODULO 03
+
+  * Para fazer upload de arquivos precisa de uma biblioteca que consiga lidar com tipo de corpos diferentes, alem do formato json.
+  * Precisa enviar no formato multipart Form data
+  > yarn add multer
+  * Após cria uma pasta na raiz chamada tmp com uma pasta interna chamada uploads.
+  * Cria um arquivo `multer.js` na pasta config
+
+  * Criar uma tabela nova na database para guardar a referencia das imagens
+  > yarn sequelize migration:create --name=create-files
+  * Preenche o arquivo
+  > yarn sequelize db:migrate
+  * cria o model File.js
+
+  * Precisa adicionar um campo com o nome do arquivo na tabela de usuarios, para isso criamos uma nova migration
+  > yarn sequelize migration:create --name=add-avatar-field-to-users
+  * Preenche o arquivo com o novo campo na tabela. esse campo é uma chave estrangeira.
+  > yarn sequelize db:migrate
+
+  * Agora é necessário relacionar o model de user com o model de file.
+  * Após fazer a associação precisa mapear essa associação dentro do arquivo index da pasta database.
+
