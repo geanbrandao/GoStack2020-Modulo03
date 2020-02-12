@@ -126,3 +126,6 @@ $ yarn add yup
   * Agora é necessário relacionar o model de user com o model de file.
   * Após fazer a associação precisa mapear essa associação dentro do arquivo index da pasta database.
 
+  * Criação da migration que cria a tabela de agendamentos
+  > yarn sequelize migration:create --name=create-appointments
+
