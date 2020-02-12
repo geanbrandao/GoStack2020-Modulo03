@@ -143,3 +143,12 @@ $ yarn add yup
   * Adicionar mongoose para lidar com a database
   > yarn add mongoose
 
+  * criar a pasta schemas que representam os models só que do mongo,
+  * pois no mongo não tem tabela, somente schemas, onde os dados não são estruturados,
+  * isso quer dizer que registros de um mesmo schema podem ter numero de campos diferentes
+
+  * Com o mongodb não tem como garantir se os dados não foram atualizados, pois ele não guarda
+  * a origem dos dados, guarda eles de forma estatica, ou seja se o usuario atualizar o nome,
+  * a mensagem que ele mandou antes e foi armazenada no mongodb vai continuar com o nome antigo.
+  * A vantagem, é que dessa forma se ganha muita performace.
+

@@ -1,9 +1,11 @@
 import * as Yup from 'yup';
-import { startOfHour, parseISO, isBefore } from 'date-fns';
+import { startOfHour, parseISO, isBefore, format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 
 import User from '../models/User';
 import File from '../models/File';
 import Appointment from '../models/Appointment';
+import Notification from '../schemas/Notification';
 
 class AppointmentController {
   async index(req, res) {
@@ -59,7 +61,7 @@ class AppointmentController {
     if (!(await schema.isValid(req.body))) {
       return res
         .status(400)
-        .json({ status: 'nok', message: 'Campos Imcompletos' });
+        .json({ status: 'nok', message: 'Campos Inválidos' });
     }
 
     const { provider_id, date } = req.body;
@@ -109,6 +111,20 @@ class AppointmentController {
       user_id: req.userId,
       provider_id,
       date: hourStart,
+    });
+    // vai pegar as informacoes do usuario atual
+    const user = await User.findByPk(req.userId);
+    // o date-fns nao trabalha em cima de caracters que estao entre aspas simples
+    // caso precise escrever algo com d
+    const formattedDate = format(
+      hourStart,
+      "'dia' dd 'de' MMMM', às' H:mm'h'",
+      { locale: pt }
+    );
+    // cria a notificacao
+    await Notification.create({
+      content: `Novo agendamento de ${user.name} para ${formattedDate}`,
+      user: provider_id,
     });
 
     return res.json({
