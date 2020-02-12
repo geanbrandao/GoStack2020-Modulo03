@@ -134,3 +134,12 @@ $ yarn add yup
   * library para lidar com datas
   > yarn add date-fns@next
 
+  * Criação de um banco de dados não relacional com mongodb
+  > docker run --name mongobarber -p 27017:27017 -d -t mongo
+  * Para se certificar que está tudo certo pode rodar
+  > docker ps
+  * E acessar o end 192.168.99.100:27017 (não é localhost por causa do docker toolbox)
+
+  * Adicionar mongoose para lidar com a database
+  > yarn add mongoose
+
