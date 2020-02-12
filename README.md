@@ -131,3 +131,6 @@ $ yarn add yup
   * Criação da migration que cria a tabela de agendamentos
   > yarn sequelize migration:create --name=create-appointments
 
+  * library para lidar com datas
+  > yarn add date-fns@next
+
