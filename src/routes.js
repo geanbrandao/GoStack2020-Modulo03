@@ -6,6 +6,7 @@ import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
 import ProviderController from './app/controllers/ProviderController';
+import AppointmentController from './app/controllers/AppointmentController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -22,6 +23,9 @@ routes.use(authMiddleware);
 routes.put('/user', UserController.update);
 
 routes.get('/providers', ProviderController.index);
+
+// agendar servicos
+routes.post('/appointment', AppointmentController.strore);
 
 // single para upar um arq e file é o nome do campo do arquivo
 routes.post('/files', upload.single('file'), FileController.store);
