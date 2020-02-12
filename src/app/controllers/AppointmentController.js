@@ -66,6 +66,13 @@ class AppointmentController {
 
     const { provider_id, date } = req.body;
 
+    if (provider_id === req.userId) {
+      return res.status(401).json({
+        status: 'nok',
+        message: 'Provider não pode marcar um appointment para si mesmo.',
+      });
+    }
+
     /**
      * Check if provider id is a provider
      */

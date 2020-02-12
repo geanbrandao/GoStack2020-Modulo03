@@ -8,6 +8,7 @@ import FileController from './app/controllers/FileController';
 import ProviderController from './app/controllers/ProviderController';
 import AppointmentController from './app/controllers/AppointmentController';
 import ScheduleController from './app/controllers/ScheduleController';
+import NotificationController from './app/controllers/NotificationController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -30,6 +31,8 @@ routes.post('/appointment', AppointmentController.strore);
 routes.get('/appointment', AppointmentController.index);
 
 routes.get('/schedule', ScheduleController.index);
+
+routes.get('/notifications', NotificationController.index);
 
 // single para upar um arq e file é o nome do campo do arquivo
 routes.post('/files', upload.single('file'), FileController.store);
