@@ -152,3 +152,9 @@ $ yarn add yup
   * a mensagem que ele mandou antes e foi armazenada no mongodb vai continuar com o nome antigo.
   * A vantagem, é que dessa forma se ganha muita performace.
 
+  * Instalar dependências para envio de email
+  > yarn add nodemailer
+  * Usaremos mailtrap para os emails, porem só funciona em ambiente de desenvolvimento
+
+  * Criar uma pasta lib onde se configuram coisas a mais da aplicacao
+

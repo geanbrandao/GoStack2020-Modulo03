@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { startOfHour, parseISO, isBefore, format } from 'date-fns';
+import { startOfHour, parseISO, isBefore, format, subHours } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
 import User from '../models/User';
@@ -138,6 +138,44 @@ class AppointmentController {
       status: 'ok',
       message: 'Agendado com sucesso',
       data: appointment,
+    });
+  }
+
+  async delete(req, res) {
+    const appointment = await Appointment.findByPk(req.params.id);
+
+    if (!appointment) {
+      return res.status(400).json({
+        status: 'nok',
+        message: 'Appointment não existe',
+      });
+    }
+
+    if (appointment.user_id !== req.userId) {
+      return res.status(401).json({
+        status: 'nok',
+        message: 'Você não pode cancelar este appointment',
+      });
+    }
+
+    // remove duas horas do horário de agendamento
+    const dateWithSub = subHours(appointment.date, 2);
+    console.log(appointment.date, '-', dateWithSub, '-', new Date());
+    if (isBefore(dateWithSub, new Date())) {
+      return res.status(401).json({
+        status: 'nok',
+        message:
+          'Você só pode cancelar appointments com 2 horas de antecedência',
+      });
+    }
+
+    appointment.canceled_at = new Date();
+
+    await appointment.save();
+
+    return res.json({
+      status: 'ok',
+      appointment,
     });
   }
 }
