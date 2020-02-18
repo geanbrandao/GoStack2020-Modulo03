@@ -158,3 +158,33 @@ $ yarn add yup
 
   * Criar uma pasta lib onde se configuram coisas a mais da aplicacao
 
+  * Para estilizar o email que esta sendo enviado, adicionar duas dependências.
+  * Vão permitir usar um template engine e receber variaveis do node.
+  > yarn add express-handlebars
+  > yarn add nodemailer-express-handlebars
+
+  * o partials são mensagens que se repetem em mais de um template
+
+  * configurar as filas ou background jobs
+  * Para isso é preciso de um banco chave/valor como redis
+  > docker run --name redisbarber -p 6379:6379 -d -t redis:alpine
+  * Precisa instalar a depencia bee-queue responsavel por gerenciar as filas
+  > yarn add bee-queue
+
+  * para monitorar exceções
+  * criar conta no [Sentry](https://sentry.io/)
+  * Adicionar um dependência
+  > yarn add @sentry/node@5.12.2
+
+  * Como as funções são assíncronas o express não consegue pegar os erros e mandar para o sentry
+  * Para resolver isso
+  > yarn add express-async-errors
+  * Faz a tratativa do erros para dar uma vizualização melhor para o desenvolvedor
+  > yarn add youch
+
+  * Criar um arquivo `.env` com as variaveis de ambiente do projeto
+  * Adicionar a dependência
+  > yarn add dotenv
+  * Depois importa `import 'dotenv/config'` nos arquivos que precisar
+  * Isso cria carrega as variavies de ambiente dentro de uma variavel global do node chamada `process.env`
+

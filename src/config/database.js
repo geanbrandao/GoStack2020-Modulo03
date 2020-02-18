@@ -1,10 +1,12 @@
+require('dotenv/config');
+
 module.exports = {
   dialect: 'postgres',
-  host: '192.168.99.100',
-  username: 'postgres',
-  password: 'docker',
-  database: 'gobarber',
-  port: 5432,
+  host: process.env.DB_HOST,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
   define: {
     // isso cria uma coluna de created e edited na tabela com a data
     timestamps: true,
